@@ -7,6 +7,8 @@ todo-crud-next/
 │   │   ├── globals.css
 │   │   ├── layout.tsx
 │   │   └── page.tsx
+│   ├── types/
+│       └── todo.ts
 │   └── lib/
 │       └── prisma.ts
 ├── prisma/

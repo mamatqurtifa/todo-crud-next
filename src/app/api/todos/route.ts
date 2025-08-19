@@ -78,11 +78,25 @@ export async function PUT(req: NextRequest) {
 
 export async function DELETE(req: NextRequest) {
   try {
+    const url = new URL(req.url)
+    const deleteAll = url.searchParams.get('all')
+    
+    // Jika ada parameter ?all=true, hapus semua data
+    if (deleteAll === 'true') {
+      const result = await prisma.todo.deleteMany({})
+      return NextResponse.json({ 
+        success: true, 
+        deletedCount: result.count,
+        message: `Successfully deleted ${result.count} todos` 
+      })
+    }
+    
+    // Jika tidak ada parameter all, lakukan delete single seperti biasa
     const { id } = await req.json()
     
     if (!id) {
       return NextResponse.json(
-        { error: 'ID is required' }, 
+        { error: 'ID is required for single delete, or use ?all=true to delete all' }, 
         { status: 400 }
       )
     }
@@ -93,9 +107,9 @@ export async function DELETE(req: NextRequest) {
     
     return NextResponse.json({ success: true })
   } catch (error) {
-    console.error('Failed to delete todo:', error)
+    console.error('Failed to delete todo(s):', error)
     return NextResponse.json(
-      { error: 'Failed to delete todo' }, 
+      { error: 'Failed to delete todo(s)' }, 
       { status: 500 }
     )
   }
