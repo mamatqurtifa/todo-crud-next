@@ -39,7 +39,7 @@ export default function SimpleTodoApp() {
   return (
     <div className="min-h-screen bg-white">
       <div className="max-w-md mx-auto p-6">
-        <h1 className="text-2xl font-bold text-center mb-6">Todo List</h1>
+        <h1 className="text-2xl font-bold text-center mb-6 text-gray-900">Todo List</h1>
         
         <div className="mb-6">
           <div className="flex gap-2">
@@ -67,7 +67,7 @@ export default function SimpleTodoApp() {
 
         <div className="space-y-2">
           {todos.length === 0 ? (
-            <p className="text-gray-500 text-center py-8">No todos yet</p>
+            <p className="text-gray-700 text-center py-8">No todos yet</p>
           ) : (
             todos.map((todo) => (
               <div
@@ -84,8 +84,8 @@ export default function SimpleTodoApp() {
                 <span
                   className={`flex-1 ${
                     todo.done 
-                      ? 'line-through text-gray-500' 
-                      : 'text-black'
+                      ? 'line-through text-gray-600' 
+                      : 'text-gray-900'
                   }`}
                 >
                   {todo.title}
@@ -103,7 +103,7 @@ export default function SimpleTodoApp() {
         </div>
         
         {todos.length > 0 && (
-          <div className="mt-6 pt-4 border-t border-gray-200 text-sm text-gray-600 text-center">
+          <div className="mt-6 pt-4 border-t border-gray-200 text-sm text-gray-800 text-center">
             {todos.filter(t => t.done).length} of {todos.length} completed
           </div>
         )}
